@@ -1,0 +1,23 @@
+.QLOCKTile {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    flex: 1;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+    text-transform: capitalize;
+    font-size: 2.7vw;
+}
+
+.QLOCKTiles {
+    width: 35vw;
+    height: 35vw;
+    display: flex;
+    flex-direction:column
+}
+
+.QLOCKTilesRow {
+    flex: 1;
+}

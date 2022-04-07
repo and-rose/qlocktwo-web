@@ -1,5 +1,10 @@
 .App {
   text-align: center;
+  font-family: "D-DIN Regular";
+}
+
+.App h1 {
+  font-weight: normal;
 }
 
 .App-logo {
