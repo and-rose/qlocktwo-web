@@ -18,8 +18,6 @@ export function QLOCKTiles(props: { characterList: string[] }) {
     characterRows.push(characterList.slice(i, i + DIMENSIONS.columns + 1));
   }
 
-  console.log(characterRows);
-
   return (
     <div className="QLOCKTiles">
       {characterRows.map((characters, rowIndex) => {
