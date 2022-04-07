@@ -1,4 +1,4 @@
-type QLOCKWordPosition = {
+export type QLOCKWordPosition = {
     startLocation: [number, number]
     length: number
 }
