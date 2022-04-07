@@ -30,6 +30,7 @@ export function QLOCKTiles(props: { characterList: string[] }) {
                 <QLOCKTile
                   character={singleCharacter}
                   id={`r${rowIndex}c${colIndex}`}
+                  enabled={false}
                 />
               );
             })}
@@ -40,9 +41,15 @@ export function QLOCKTiles(props: { characterList: string[] }) {
   );
 }
 
-function QLOCKTile(props: { character: string; id: string }) {
+function QLOCKTile(props: { character: string; id: string; enabled: boolean }) {
+  console.log(Math.random() < 0.5);
   return (
-    <div className={clsx(`QLOCKTile tile${props.id}`)}>
+    <div
+      className={clsx(
+        `QLOCKTile tile${props.id}`,
+        Math.random() < 0.5 && "tile-active"
+      )}
+    >
       <text>{props.character}</text>
     </div>
   );
