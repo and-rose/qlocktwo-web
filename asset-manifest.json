@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/qlocktwo-web/static/css/main.b1c0af16.css",
-    "main.js": "/qlocktwo-web/static/js/main.460e6eb1.js",
+    "main.js": "/qlocktwo-web/static/js/main.ba913fa8.js",
     "static/js/787.d96e9a15.chunk.js": "/qlocktwo-web/static/js/787.d96e9a15.chunk.js",
     "static/media/roboto-all-500-normal.woff": "/qlocktwo-web/static/media/roboto-all-500-normal.52cb737b682eb9661ee1.woff",
     "static/media/roboto-all-700-normal.woff": "/qlocktwo-web/static/media/roboto-all-700-normal.ef6d1d09b20b877fee4e.woff",
@@ -39,11 +39,11 @@
     "static/media/roboto-greek-ext-700-normal.woff2": "/qlocktwo-web/static/media/roboto-greek-ext-700-normal.9674bc0ae12c2551d9d1.woff2",
     "index.html": "/qlocktwo-web/index.html",
     "main.b1c0af16.css.map": "/qlocktwo-web/static/css/main.b1c0af16.css.map",
-    "main.460e6eb1.js.map": "/qlocktwo-web/static/js/main.460e6eb1.js.map",
+    "main.ba913fa8.js.map": "/qlocktwo-web/static/js/main.ba913fa8.js.map",
     "787.d96e9a15.chunk.js.map": "/qlocktwo-web/static/js/787.d96e9a15.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b1c0af16.css",
-    "static/js/main.460e6eb1.js"
+    "static/js/main.ba913fa8.js"
   ]
 }
