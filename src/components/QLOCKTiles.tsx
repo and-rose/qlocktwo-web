@@ -8,7 +8,6 @@ import {
   ConstantWordPositions,
   QLOCKWordPosition,
 } from "./WordPositions";
-import { NoSubstitutionTemplateLiteral } from "typescript";
 
 const Row = styled.div`
   display: flex;
@@ -157,7 +156,12 @@ export function QLOCKTiles(props: {
         );
 
     setEnabledStatuses(updatedStatuses);
-  }, [props.fullDate]);
+  }, [
+    props.fullDate,
+    props.hideVerbose,
+    props.meridiemIndicator,
+    props.showSeconds,
+  ]);
 
   for (let i = 0; i < characterList.length; i += DIMENSIONS.columns) {
     characterRows.push(characterList.slice(i, i + DIMENSIONS.columns));
