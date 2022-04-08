@@ -1,0 +1,38 @@
+.CornerIndicatorsContainer {
+    position:relative;
+    height: 35vw;
+    width: 35vw;
+}
+
+.CornerIndicator {
+    position: absolute;
+    border-radius: 2px;
+    background-color: #2f3238;
+    height: 0.3vw;
+    width: 0.3vw;
+}
+
+#topLeft {
+    top: -1vw;
+    left: -1vw;
+}
+
+#topRight {
+    top: -1vw;
+    right:-1vw;
+}
+
+#bottomLeft {
+    bottom: -1vw;
+    left: -1vw;
+}
+
+#bottomRight {
+    bottom: -1vw;
+    right: -1vw;
+}
+
+.CornerIndicator.tile-active {
+    background-color: #f0f0f0;
+    box-shadow : 0vw 0vw 5px #f0f0f0;
+}

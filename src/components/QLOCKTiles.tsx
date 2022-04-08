@@ -12,6 +12,32 @@ const Row = styled.div`
 
 const DIMENSIONS = { rows: 10, columns: 11 };
 
+const MINUTE_DESCRIPTIONS = [
+  ConstantWordPositions.OClock,
+  ConstantWordPositions.FiveMinute,
+  ConstantWordPositions.TenMinute,
+  ConstantWordPositions.Quarter,
+  ConstantWordPositions.Twenty,
+  ConstantWordPositions.TwentyFive,
+  ConstantWordPositions.Half,
+];
+
+const HOUR_DESCRIPTIONS = [
+  ConstantWordPositions.Twelve,
+  ConstantWordPositions.One,
+  ConstantWordPositions.Two,
+  ConstantWordPositions.Three,
+  ConstantWordPositions.Four,
+  ConstantWordPositions.Five,
+  ConstantWordPositions.Six,
+  ConstantWordPositions.Seven,
+  ConstantWordPositions.Eight,
+  ConstantWordPositions.Nine,
+  ConstantWordPositions.Ten,
+  ConstantWordPositions.Eleven,
+  ConstantWordPositions.Twelve,
+];
+
 function enableRelatedTiles(
   tileInfo: QLOCKWordPosition,
   targetArray: boolean[][]
@@ -21,57 +47,76 @@ function enableRelatedTiles(
     targetArray[tilePosition[0]][tilePosition[1] + i] = true;
 }
 
-const emptyStatusArray = new Array<boolean>(DIMENSIONS.rows)
-  .fill(false)
-  .map(() => {
+function generateEmptyArray() {
+  return new Array<boolean>(DIMENSIONS.rows).fill(false).map(() => {
     return new Array<boolean>(DIMENSIONS.columns).fill(false);
   });
+}
+
+function enableTimeInterval(
+  minutes: number,
+  hours: number,
+  targetArray: boolean[][],
+  meridiemIndicator: boolean,
+  verbose: boolean
+) {
+  const fiveMinuteIndex = Math.floor(minutes / 5);
+  console.log(fiveMinuteIndex);
+
+  if (verbose) {
+    enableRelatedTiles(ConstantWordPositions.It, targetArray);
+    enableRelatedTiles(ConstantWordPositions.Is, targetArray);
+  }
+
+  //Check if it's AM or PM
+  if (meridiemIndicator) {
+    if (hours >= 12) {
+      //Get static position from predefined constant locations
+      enableRelatedTiles(ConstantWordPositions.PM, targetArray);
+    } else {
+      enableRelatedTiles(ConstantWordPositions.AM, targetArray);
+    }
+  }
+
+  if (fiveMinuteIndex > 6) {
+    enableRelatedTiles(ConstantWordPositions.To, targetArray);
+    enableRelatedTiles(
+      MINUTE_DESCRIPTIONS[6 - (fiveMinuteIndex % 6)],
+      targetArray
+    );
+  } else if (fiveMinuteIndex > 0 && fiveMinuteIndex <= 6) {
+    enableRelatedTiles(ConstantWordPositions.Past, targetArray);
+    enableRelatedTiles(MINUTE_DESCRIPTIONS[fiveMinuteIndex], targetArray);
+  } else {
+    enableRelatedTiles(MINUTE_DESCRIPTIONS[fiveMinuteIndex], targetArray);
+  }
+
+  const hourIndex = (hours % 12) + (fiveMinuteIndex > 6 ? 1 : 0);
+  enableRelatedTiles(HOUR_DESCRIPTIONS[hourIndex], targetArray);
+}
 
 export function QLOCKTiles(props: { characterList: string[]; fullDate: Date }) {
   const characterList = props.characterList;
   const characterRows = [];
 
-  const [enabledStatuses, setEnabledStatuses] =
-    useState<boolean[][]>(emptyStatusArray);
-
-  // const time: Time = {
-  //   hours: props.fullDate.getHours(),
-  //   minutes: props.fullDate.getMinutes(),
-  //   seconds: props.fullDate.getSeconds(),
-  // };
-
-  const time: Time = {
-    hours: 21,
-    minutes: 15,
-    seconds: props.fullDate.getSeconds(),
-  };
+  const [enabledStatuses, setEnabledStatuses] = useState<boolean[][]>(
+    generateEmptyArray()
+  );
 
   //Set The Clock Face Time
   useEffect(() => {
-    const updatedStatuses = emptyStatusArray;
+    const time: Time = {
+      hours: props.fullDate.getHours(),
+      minutes: props.fullDate.getMinutes(),
+      seconds: props.fullDate.getSeconds(),
+    };
 
-    enableRelatedTiles(ConstantWordPositions.It, updatedStatuses);
-    enableRelatedTiles(ConstantWordPositions.Is, updatedStatuses);
+    const updatedStatuses = generateEmptyArray();
 
-    //Check if it's AM or PM
-    if (time.hours >= 12) {
-      //Get static position from predefined constant locations
-      enableRelatedTiles(ConstantWordPositions.PM, updatedStatuses);
-    } else {
-      enableRelatedTiles(ConstantWordPositions.AM, updatedStatuses);
-    }
-
-    if (time.minutes === 45 || time.minutes === 15) {
-      enableRelatedTiles(ConstantWordPositions.Quarter, updatedStatuses);
-      if (time.minutes === 45) {
-        enableRelatedTiles(ConstantWordPositions.To, updatedStatuses);
-      } else {
-        enableRelatedTiles(ConstantWordPositions.Past, updatedStatuses);
-      }
-    }
+    enableTimeInterval(time.minutes, time.hours, updatedStatuses, false, true);
 
     setEnabledStatuses(updatedStatuses);
-  }, [time.hours]);
+  }, [props.fullDate]);
 
   for (let i = 0; i < characterList.length; i += DIMENSIONS.columns) {
     characterRows.push(characterList.slice(i, i + DIMENSIONS.columns));

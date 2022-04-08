@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./QLOCKTWO.css";
 import { QLOCKTiles } from "./QLOCKTiles";
+import { QLOCKCornerIndicators } from "./QLOCKCornerIndicators";
 
 const QLOCKString =
   "itlisasampmacquarterdctwentyfivexhalfstenftopasterunineonesixthreefourfivetwoeightelevenseventwelvetenseoclock";
@@ -29,8 +30,11 @@ export function QLOCKTWO() {
     setDate(new Date());
   }
   return (
-    <div className="QLOCKTWOContainer">
-      <QLOCKTiles characterList={QLOCKTileChracters} fullDate={date} />
+    <div>
+      <div className="QLOCKTWOContainer">
+        <QLOCKCornerIndicators additive={date.getMinutes() % 5} />
+        <QLOCKTiles characterList={QLOCKTileChracters} fullDate={date} />
+      </div>
     </div>
   );
 }
