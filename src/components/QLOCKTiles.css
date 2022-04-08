@@ -17,7 +17,7 @@
 
 .tile-active text{
     color: #f0f0f0;
-    text-shadow : 0vmin 0vmin 5px #f0f0f0;
+    text-shadow : 0vmin 0vmin 0.5vmin #f0f0f0;
     transition: all 200ms;
 }
 
