@@ -11,12 +11,14 @@
 }
 
 .QLOCKTile text{
-    color: #2f3238
+    color: #2f3238;
+    transition: all 200ms;
 }
 
 .tile-active text{
     color: #f0f0f0;
     text-shadow : 0vmin 0vmin 5px #f0f0f0;
+    transition: all 200ms;
 }
 
 .QLOCKTiles {
