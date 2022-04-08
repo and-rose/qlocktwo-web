@@ -63,21 +63,22 @@ function enableTimeInterval(
   const fiveMinuteIndex = Math.floor(minutes / 5);
   console.log(fiveMinuteIndex);
 
+  //Display "It Is" conditionally
   if (verbose) {
     enableRelatedTiles(ConstantWordPositions.It, targetArray);
     enableRelatedTiles(ConstantWordPositions.Is, targetArray);
   }
 
-  //Check if it's AM or PM
+  //Display "AM" or "PM" conditionally
   if (meridiemIndicator) {
     if (hours >= 12) {
-      //Get static position from predefined constant locations
       enableRelatedTiles(ConstantWordPositions.PM, targetArray);
     } else {
       enableRelatedTiles(ConstantWordPositions.AM, targetArray);
     }
   }
 
+  //Check if we are in the first half of an hour or on it precisely
   if (fiveMinuteIndex > 6) {
     enableRelatedTiles(ConstantWordPositions.To, targetArray);
     enableRelatedTiles(
@@ -91,6 +92,7 @@ function enableTimeInterval(
     enableRelatedTiles(MINUTE_DESCRIPTIONS[fiveMinuteIndex], targetArray);
   }
 
+  //Show either the current hour or the next
   const hourIndex = (hours % 12) + (fiveMinuteIndex > 6 ? 1 : 0);
   enableRelatedTiles(HOUR_DESCRIPTIONS[hourIndex], targetArray);
 }

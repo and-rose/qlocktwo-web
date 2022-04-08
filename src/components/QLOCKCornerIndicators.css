@@ -1,35 +1,40 @@
 .CornerIndicatorsContainer {
     position:relative;
-    height: 35vw;
-    width: 35vw;
+    height: 75vmin;
+    width: 75vmin;
+
 }
 
 .CornerIndicator {
     position: absolute;
     border-radius: 2px;
     background-color: #2f3238;
-    height: 0.3vw;
-    width: 0.3vw;
+    height: 0.8vmin;
+    width: 0.8vmin;
+}
+
+:root {
+    --indicatorDistance: -1.2vh;
 }
 
 #topLeft {
-    top: -1vw;
-    left: -1vw;
+    top: var(--indicatorDistance);
+    left: var(--indicatorDistance);
 }
 
 #topRight {
-    top: -1vw;
-    right:-1vw;
+    top: var(--indicatorDistance);
+    right:var(--indicatorDistance);
 }
 
 #bottomLeft {
-    bottom: -1vw;
-    left: -1vw;
+    bottom: var(--indicatorDistance);
+    left: var(--indicatorDistance);
 }
 
 #bottomRight {
-    bottom: -1vw;
-    right: -1vw;
+    bottom: var(--indicatorDistance);
+    right: var(--indicatorDistance);
 }
 
 .CornerIndicator.tile-active {
