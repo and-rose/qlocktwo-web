@@ -3,6 +3,7 @@ import "./QLOCKTWO.css";
 import { QLOCKTiles } from "./QLOCKTiles";
 import { QLOCKCornerIndicators } from "./QLOCKCornerIndicators";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import CommentsDisabledIcon from "@mui/icons-material/CommentsDisabled";
 import ToggleButton from "@mui/material/ToggleButton";
 
 const QLOCKString =
@@ -33,6 +34,8 @@ const toggleButtonStyles = {
 export function QLOCKTWO() {
   const [date, setDate] = useState(new Date());
   const [secondsSelected, setSecondsSelected] = useState(false);
+  const [ampmSelected, setampmSelected] = useState(false);
+  const [hideVerbose, setHideVerbose] = useState(false);
 
   useEffect(() => {
     const dateUpdateInterval = setInterval(() => {
@@ -55,20 +58,48 @@ export function QLOCKTWO() {
           characterList={QLOCKTileChracters}
           fullDate={date}
           showSeconds={secondsSelected}
+          meridiemIndicator={ampmSelected}
+          hideVerbose={hideVerbose}
         />
       </div>
-      <ToggleButton
-        value={"text"}
-        sx={toggleButtonStyles}
-        className={"SecondsButton"}
-        color={"primary"}
-        selected={secondsSelected}
-        onChange={() => {
-          setSecondsSelected(!secondsSelected);
-        }}
-      >
-        <AccessTimeIcon />
-      </ToggleButton>
+      <div className="QLOCKSettings">
+        <ToggleButton
+          value={"text"}
+          sx={toggleButtonStyles}
+          className={"VerboseButton"}
+          color={"primary"}
+          selected={hideVerbose}
+          onChange={() => {
+            setHideVerbose(!hideVerbose);
+          }}
+        >
+          <CommentsDisabledIcon fontSize={"medium"} />
+        </ToggleButton>
+        <ToggleButton
+          value={"text"}
+          sx={toggleButtonStyles}
+          className={"SecondsButton"}
+          color={"primary"}
+          selected={secondsSelected}
+          onChange={() => {
+            setSecondsSelected(!secondsSelected);
+          }}
+        >
+          <AccessTimeIcon fontSize={"medium"} />
+        </ToggleButton>
+        <ToggleButton
+          value={"text"}
+          sx={toggleButtonStyles}
+          className={"AMPMButton"}
+          color={"primary"}
+          selected={ampmSelected}
+          onChange={() => {
+            setampmSelected(!ampmSelected);
+          }}
+        >
+          <span>AM PM</span>
+        </ToggleButton>
+      </div>
     </div>
   );
 }

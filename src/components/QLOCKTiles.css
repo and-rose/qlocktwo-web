@@ -10,12 +10,12 @@
     text-transform: capitalize;
 }
 
-.QLOCKTile text{
+.QLOCKTile span{
     color: #2f3238;
     transition: color 200ms, text-shadow 200ms;
 }
 
-.tile-active text{
+.tile-active span{
     color: #f0f0f0;
     text-shadow: 0vmin 0vmin 0.4vmin #f0f0f0;
     transition: color 200ms, text-shadow 200ms;

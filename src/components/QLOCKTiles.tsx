@@ -79,12 +79,12 @@ function enableTimeInterval(
   hours: number,
   targetArray: boolean[][],
   meridiemIndicator: boolean,
-  verbose: boolean
+  hideVerbose: boolean
 ) {
   const fiveMinuteIndex = Math.floor(minutes / 5);
 
   //Display "It Is" conditionally
-  if (verbose) {
+  if (!hideVerbose) {
     enableRelatedTiles(ConstantWordPositions.It, targetArray);
     enableRelatedTiles(ConstantWordPositions.Is, targetArray);
   }
@@ -121,6 +121,8 @@ export function QLOCKTiles(props: {
   characterList: string[];
   fullDate: Date;
   showSeconds: boolean;
+  meridiemIndicator: boolean;
+  hideVerbose: boolean;
 }) {
   const characterList = props.characterList;
   const characterRows = [];
@@ -150,8 +152,8 @@ export function QLOCKTiles(props: {
           time.minutes,
           time.hours,
           updatedStatuses,
-          false,
-          true
+          props.meridiemIndicator,
+          props.hideVerbose
         );
 
     setEnabledStatuses(updatedStatuses);
@@ -165,13 +167,13 @@ export function QLOCKTiles(props: {
     <div className="QLOCKTiles">
       {characterRows.map((characters, rowIndex) => {
         return (
-          <Row className={`QLOCKTilesRow qTilesRow${rowIndex}`}>
+          <Row className={`QLOCKTilesRow qTilesRow${rowIndex}`} key={rowIndex}>
             {characters.map((singleCharacter, colIndex) => {
               return (
                 <QLOCKTile
                   character={singleCharacter}
-                  id={`r${rowIndex}c${colIndex}`}
                   enabled={enabledStatuses[rowIndex][colIndex]}
+                  key={`r${rowIndex}c${colIndex}char${singleCharacter}`}
                 />
               );
             })}
@@ -182,15 +184,10 @@ export function QLOCKTiles(props: {
   );
 }
 
-function QLOCKTile(props: { character: string; id: string; enabled: boolean }) {
+function QLOCKTile(props: { character: string; enabled: boolean }) {
   return (
-    <div
-      className={clsx(
-        `QLOCKTile tile${props.id}`,
-        props.enabled && "tile-active"
-      )}
-    >
-      <text>{props.character}</text>
+    <div className={clsx("QLOCKTile", props.enabled && "tile-active")}>
+      <span>{props.character}</span>
     </div>
   );
 }

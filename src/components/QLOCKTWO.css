@@ -10,8 +10,33 @@
     align-items: center;
 }
 
-.SecondsButton {
-    background-color: #1c1f26;
-    height: 65vmin;
+.QLOCKSettings {
+    height: 85vmin;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     width: 7vmin;
+}
+
+.QLOCKSettings > button{
+    margin:1vmin 0 1vmin 0;
+    background-color: #1c1f26;
+}
+
+.VerboseButton {
+    flex: 1;
+}
+
+.SecondsButton {
+    flex: 3;
+}
+
+.AMPMButton {  
+    flex: 1;
+}
+
+.AMPMButton span {
+    white-space: normal;
+    word-wrap: break-word;
+    font-size: 19px;
 }
