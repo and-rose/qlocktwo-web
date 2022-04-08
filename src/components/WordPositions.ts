@@ -39,6 +39,7 @@ export const ConstantDigitShapes: [number, number][][] = [
     [5, 0],
     [5, 4],
     [4, 4],
+    [4, 0],
     [3, 0],
     [3, 4],
     [2, 0],
