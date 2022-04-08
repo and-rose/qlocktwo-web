@@ -3,6 +3,7 @@ import { QLOCKTWO } from "./components/QLOCKTWO";
 import "./App.css";
 
 function App() {
+  document.title = "QLOCKTWO-Web";
   return (
     <div className="App">
       <header className="App-header">
