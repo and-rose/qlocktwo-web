@@ -61,7 +61,6 @@ function enableTimeInterval(
   verbose: boolean
 ) {
   const fiveMinuteIndex = Math.floor(minutes / 5);
-  console.log(fiveMinuteIndex);
 
   //Display "It Is" conditionally
   if (verbose) {
