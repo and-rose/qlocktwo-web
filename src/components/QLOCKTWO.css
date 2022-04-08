@@ -2,3 +2,15 @@
     background-color: #1c1f26;
     padding: 5vmin;
 }
+
+.CentreWrapper {
+    display: flex;
+    gap: 2vmin;
+    justify-content: center;
+    align-items: center;
+}
+
+.SecondsButton {
+    color: #1c1f26;
+    height: 10vmin;
+}
