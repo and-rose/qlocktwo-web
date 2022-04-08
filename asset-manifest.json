@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/qlocktwo-web/static/css/main.ba41b8f4.css",
-    "main.js": "/qlocktwo-web/static/js/main.2a747808.js",
+    "main.js": "/qlocktwo-web/static/js/main.e245b569.js",
     "static/js/787.d96e9a15.chunk.js": "/qlocktwo-web/static/js/787.d96e9a15.chunk.js",
     "static/media/D-DIN.otf": "/qlocktwo-web/static/media/D-DIN.31d456695bd8dea72c8a.otf",
     "static/media/D-DINExp.otf": "/qlocktwo-web/static/media/D-DINExp.b3e48ac217b6206cbca0.otf",
     "index.html": "/qlocktwo-web/index.html",
     "main.ba41b8f4.css.map": "/qlocktwo-web/static/css/main.ba41b8f4.css.map",
-    "main.2a747808.js.map": "/qlocktwo-web/static/js/main.2a747808.js.map",
+    "main.e245b569.js.map": "/qlocktwo-web/static/js/main.e245b569.js.map",
     "787.d96e9a15.chunk.js.map": "/qlocktwo-web/static/js/787.d96e9a15.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ba41b8f4.css",
-    "static/js/main.2a747808.js"
+    "static/js/main.e245b569.js"
   ]
 }
