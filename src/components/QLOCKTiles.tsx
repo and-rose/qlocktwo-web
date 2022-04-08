@@ -8,6 +8,7 @@ import {
   ConstantWordPositions,
   QLOCKWordPosition,
 } from "./WordPositions";
+import { NoSubstitutionTemplateLiteral } from "typescript";
 
 const Row = styled.div`
   display: flex;
@@ -52,21 +53,25 @@ function enableRelatedTiles(
 }
 
 function enableDigit(
-  tensDigit: [number, number][],
-  onesDigit: [number, number][],
+  digitPositions: [number, number][],
   targetArray: boolean[][],
-  rowStart: number
+  rowStart: number,
+  colStart: number
 ) {
-  tensDigit.map((position) => {
-    return (targetArray[rowStart + position[0]][position[1]] = true);
-  });
-
-  onesDigit.map((position) => {
-    return (targetArray[rowStart + position[0]][6 + position[1]] = true);
+  digitPositions.map((position) => {
+    return (targetArray[rowStart + position[0]][colStart + position[1]] = true);
   });
 }
 
-function enableSecondInterval(seconds: number, targetArray: boolean[][]) {}
+function enableSecondInterval(seconds: number, targetArray: boolean[][]) {
+  enableDigit(
+    ConstantDigitShapes[Math.floor((seconds / 10) % 10)],
+    targetArray,
+    2,
+    0
+  );
+  enableDigit(ConstantDigitShapes[Math.floor(seconds % 10)], targetArray, 2, 6);
+}
 
 function generateEmptyArray() {
   return new Array<boolean>(DIMENSIONS.rows).fill(false).map(() => {
@@ -142,12 +147,7 @@ export function QLOCKTiles(props: {
     const updatedStatuses = generateEmptyArray();
 
     props.showSeconds
-      ? enableDigit(
-          ConstantDigitShapes[Math.floor((time.seconds / 10) % 10)],
-          ConstantDigitShapes[Math.floor(time.seconds % 10)],
-          updatedStatuses,
-          2
-        )
+      ? enableSecondInterval(time.seconds, updatedStatuses)
       : enableTimeInterval(
           time.minutes,
           time.hours,
