@@ -3,7 +3,11 @@ import React, { useEffect, useState } from "react";
 import "./QLOCKTiles.css";
 import styled from "styled-components";
 import { Time } from "./QLOCKTWO";
-import { ConstantWordPositions, QLOCKWordPosition } from "./WordPositions";
+import {
+  ConstantDigitShapes,
+  ConstantWordPositions,
+  QLOCKWordPosition,
+} from "./WordPositions";
 
 const Row = styled.div`
   display: flex;
@@ -46,6 +50,23 @@ function enableRelatedTiles(
   for (let i = 0; i < tileInfo.length; i++)
     targetArray[tilePosition[0]][tilePosition[1] + i] = true;
 }
+
+function enableDigit(
+  tensDigit: [number, number][],
+  onesDigit: [number, number][],
+  targetArray: boolean[][],
+  rowStart: number
+) {
+  tensDigit.map((position) => {
+    return (targetArray[rowStart + position[0]][position[1]] = true);
+  });
+
+  onesDigit.map((position) => {
+    return (targetArray[rowStart + position[0]][6 + position[1]] = true);
+  });
+}
+
+function enableSecondInterval(seconds: number, targetArray: boolean[][]) {}
 
 function generateEmptyArray() {
   return new Array<boolean>(DIMENSIONS.rows).fill(false).map(() => {
@@ -96,7 +117,11 @@ function enableTimeInterval(
   enableRelatedTiles(HOUR_DESCRIPTIONS[hourIndex], targetArray);
 }
 
-export function QLOCKTiles(props: { characterList: string[]; fullDate: Date }) {
+export function QLOCKTiles(props: {
+  characterList: string[];
+  fullDate: Date;
+  showSeconds: boolean;
+}) {
   const characterList = props.characterList;
   const characterRows = [];
 
@@ -114,7 +139,20 @@ export function QLOCKTiles(props: { characterList: string[]; fullDate: Date }) {
 
     const updatedStatuses = generateEmptyArray();
 
-    enableTimeInterval(time.minutes, time.hours, updatedStatuses, false, true);
+    props.showSeconds
+      ? enableDigit(
+          ConstantDigitShapes[Math.floor((time.seconds / 10) % 10)],
+          ConstantDigitShapes[Math.floor(time.seconds % 10)],
+          updatedStatuses,
+          2
+        )
+      : enableTimeInterval(
+          time.minutes,
+          time.hours,
+          updatedStatuses,
+          false,
+          true
+        );
 
     setEnabledStatuses(updatedStatuses);
   }, [props.fullDate]);

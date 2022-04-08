@@ -11,6 +11,7 @@
 }
 
 .SecondsButton {
-    color: #1c1f26;
-    height: 10vmin;
+    background-color: #1c1f26;
+    height: 65vmin;
+    width: 7vmin;
 }
