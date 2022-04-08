@@ -27,7 +27,6 @@ const toggleButtonStyles = {
   "&.Mui-selected": {
     backgroundColor: "#1c1f26",
     color: "#e6e6e6",
-    textShadow: "0vmin 0vmin 0.4vmin #f0f0f0",
   },
 };
 
