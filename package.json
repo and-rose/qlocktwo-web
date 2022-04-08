@@ -1,7 +1,7 @@
 {
   "homepage": "http://and-rose.github.io/qlocktwo-web",
   "name": "qlocktwo-web",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.9.0",
