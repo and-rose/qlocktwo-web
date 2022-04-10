@@ -39,7 +39,6 @@ const HOUR_DESCRIPTIONS = [
   ConstantWordPositions.Nine,
   ConstantWordPositions.Ten,
   ConstantWordPositions.Eleven,
-  ConstantWordPositions.Twelve,
 ];
 
 function enableRelatedTiles(

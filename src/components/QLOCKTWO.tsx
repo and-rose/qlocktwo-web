@@ -5,6 +5,11 @@ import { QLOCKCornerIndicators } from "./QLOCKCornerIndicators";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import CommentsDisabledIcon from "@mui/icons-material/CommentsDisabled";
 import ToggleButton from "@mui/material/ToggleButton";
+import switchNoise1 from "../audio/switch1.wav";
+import tickNoise from "../audio/tick.wav";
+import tockNoise from "../audio/tock.wav";
+import switchNoise6 from "../audio/switch6.wav";
+import useSound from "use-sound";
 
 const QLOCKString =
   "itlisasampmacquarterdctwentyfivexhalfstenftopasterunineonesixthreefourfivetwoeightelevenseventwelvetenseoclock";
@@ -35,6 +40,10 @@ export function QLOCKTWO() {
   const [secondsSelected, setSecondsSelected] = useState(false);
   const [ampmSelected, setampmSelected] = useState(false);
   const [hideVerbose, setHideVerbose] = useState(false);
+  const [playSwitchOn] = useSound(switchNoise1, { volume: 0.3 });
+  const [playSwitchOff] = useSound(switchNoise6, { volume: 0.25 });
+  const [playTick] = useSound(tickNoise, { volume: 0.05 });
+  const [playTock] = useSound(tockNoise, { volume: 0.05 });
 
   useEffect(() => {
     const dateUpdateInterval = setInterval(() => {
@@ -45,6 +54,12 @@ export function QLOCKTWO() {
       clearInterval(dateUpdateInterval);
     };
   }, []);
+
+  useEffect(() => {
+    if (secondsSelected) {
+      date.getSeconds() % 1 ? playTick() : playTock();
+    }
+  }, [date.getSeconds()]);
 
   function tick() {
     setDate(new Date());
@@ -69,6 +84,7 @@ export function QLOCKTWO() {
           color={"primary"}
           selected={hideVerbose}
           onChange={() => {
+            hideVerbose ? playSwitchOff() : playSwitchOn();
             setHideVerbose(!hideVerbose);
           }}
         >
@@ -81,6 +97,7 @@ export function QLOCKTWO() {
           color={"primary"}
           selected={secondsSelected}
           onChange={() => {
+            secondsSelected ? playSwitchOff() : playSwitchOn();
             setSecondsSelected(!secondsSelected);
           }}
         >
@@ -93,6 +110,7 @@ export function QLOCKTWO() {
           color={"primary"}
           selected={ampmSelected}
           onChange={() => {
+            ampmSelected ? playSwitchOff() : playSwitchOn();
             setampmSelected(!ampmSelected);
           }}
         >
