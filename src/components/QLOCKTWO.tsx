@@ -44,6 +44,7 @@ export function QLOCKTWO() {
   const [playSwitchOff] = useSound(switchNoise6, { volume: 0.25 });
   const [playTick] = useSound(tickNoise, { volume: 0.05 });
   const [playTock] = useSound(tockNoise, { volume: 0.05 });
+  const seconds = date.getSeconds();
 
   useEffect(() => {
     const dateUpdateInterval = setInterval(() => {
@@ -57,9 +58,9 @@ export function QLOCKTWO() {
 
   useEffect(() => {
     if (secondsSelected) {
-      date.getSeconds() % 1 ? playTick() : playTock();
+      seconds % 1 ? playTick() : playTock();
     }
-  }, [date.getSeconds()]);
+  }, [seconds]);
 
   function tick() {
     setDate(new Date());
